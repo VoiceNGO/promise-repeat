@@ -28,6 +28,8 @@ function retryPromise( fn, options ){
       var now = +new Date();
 
       return Promise.resolve().then( fn ).then(
+
+        // Success!  Either pass the value through or call `resolveAfterReject`
           function( result ){
             var now = +new Date();
 
