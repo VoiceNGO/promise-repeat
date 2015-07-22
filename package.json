@@ -1,6 +1,6 @@
 {
   "name": "promise-repeat",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A simple dependency-free promise library that retries a given function until it succeeds or certain fail criteria are met.  Can also be used to timeout Promises.",
   "main": "index.js",
   "author": "Mark Kahn <m-npm@vouchr.com>",
@@ -9,7 +9,7 @@
     "url": "https://github.com/zyklus/promise-repeat"
   },
   "license": "Unlicense",
-  "keywords" : [
+  "keywords": [
     "promise",
     "promises",
     "repeat",
@@ -17,5 +17,14 @@
     "timeout",
     "bluebird",
     "A+"
-  ]
+  ],
+  "files" : [
+    "index.js",
+    "License",
+    "Readme.md"
+  ],
+  "devDependencies": {
+    "bluebird": ">=2.9.34",
+    "chai": ">=3.2.0"
+  }
 }

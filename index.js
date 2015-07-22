@@ -1,12 +1,16 @@
 function delay( ms ){
-  return new Promise(function( resolve ){
-    ( ms > 0 ) ? setTimeout( resolve, ms ) : resolve();
-  });
+  return new Promise( function( resolve ){
+    ( ms === Infinity )
+      ? '' // do nothing since it'll never resolve anyway!
+      : ( ms > 0 )
+        ? setTimeout( resolve, ms )
+        : resolve();
+  } );
 }
 
 function retryPromise( fn, options ){
   return function(){
-    var args     = [].slice.call( arguments );
+    var args = [].slice.call( arguments );
 
     return new Promise( function( resolve, reject ){
       if( !options ){ options = {}; }
@@ -14,18 +18,13 @@ function retryPromise( fn, options ){
       var maxAttempts        = options.maxAttempts        || 3;
       var minTimeout         = options.minTimeout         || 0;
       var maxTimeout         = options.maxTimeout         || 3000;
-      var debounce           = options.debounce           || 0;
-      var debounceFn         = options.debounceFn         || function(retries, debounce){ return debounce; };
+      var throttle           = options.throttle           || 0;
+      var throttleFn         = options.throttleFn         || function(retries, throttle){ return throttle; };
       var boolRetryFn        = options.boolRetryFn        || function(){ return true; };
       var resolveAfterReject = options.resolveAfterReject || function(){};
 
       var startTime  = +new Date();
       var retryCount = 0;
-
-      // reject if fn (or subsequent call) is taking too long
-      setTimeout( function(){
-        reject( new Error( 'PromiseRepeat: Function failed to resolve after ' + (1+retryCount) + ' attempts and ' + maxTimeout + 'ms.' ) );
-      }, maxTimeout );
 
       function run(){
         var now = +new Date();
@@ -50,9 +49,9 @@ function retryPromise( fn, options ){
             if(
                  ( ++retryCount < maxAttempts )
               && ( now < ( startTime + maxTimeout ) )
-              && boolRetryFn( err, {retryCount: retryCount} )
+              && boolRetryFn( err, {retryCount : retryCount} )
             ){
-              return delay( ( minTimeout - now + startTime ) || debounceFn( retryCount, debounce ) )
+              return delay( ( minTimeout - now + startTime ) || throttleFn( retryCount, throttle ) )
                 .then( run );
             }
 
@@ -61,7 +60,14 @@ function retryPromise( fn, options ){
         ).then( resolve );
       }
 
-      return run();
+      return Promise.race([
+          run()
+
+        // reject if fn (or subsequent call) is taking too long
+        , delay( maxTimeout ).then( function(){
+            throw new Error( 'PromiseRepeat: Function failed to resolve after ' + (1+retryCount) + ' attempts and ' + maxTimeout + 'ms.' );
+          })
+      ]);
     });
   };
 }
