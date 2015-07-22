@@ -1,0 +1,12 @@
+{
+  "name": "promise-repeat",
+  "version": "0.1.0",
+  "description": "A simple dependency-free promise library that retries a given function until certain fail criteria are met",
+  "main": "index.js",
+  "author": "Mark Kahn <m-npm@vouchr.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zyklus/promise-repeat"
+  },
+  "license": "Unlicense"
+}
