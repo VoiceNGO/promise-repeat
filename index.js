@@ -5,7 +5,9 @@ function delay( ms ){
 }
 
 function retryPromise( fn, options ){
-  return function( result ){
+  return function(){
+    var args     = [].slice.call( arguments );
+
     return new Promise( function( resolve, reject ){
       if( !options ){ options = {}; }
 
@@ -28,7 +30,10 @@ function retryPromise( fn, options ){
       function run(){
         var now = +new Date();
 
-        return Promise.resolve( result ).then( fn ).then(
+        // in case the promise comes in as a "spread" bind the incoming arguments to the function
+        return Promise.resolve().then( function(){
+          return fn.apply( fn, args );
+        }).then(
 
           // Success!  Either pass the value through or call `resolveAfterReject`
             function( result ){
