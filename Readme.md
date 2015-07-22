@@ -13,7 +13,13 @@ $ npm install promise-repeat
 ## Usage
 
 ```js
-promiseRepeat( fn, [options] )
+somePromiseFunction()
+  .then ( something )
+  .then ( promiseRepeat( fn, [options] ) )
+  .then ( ... )
+  .catch( ... )
+
+promiseRepeat( fn, [options] )() // note the trailing () which kicks-off the chain
   .then ( ... )
   .catch( ... )
 ```
@@ -22,7 +28,7 @@ promiseRepeat( fn, [options] )
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| maxRetries | 3 | Maximum number of attempts to make before failing
+| maxAttempts | 3 | Maximum number of attempts to make before failing
 | minTimeout | 0 | Minimum time before first retry
 | maxTimeout | 3,000 (3 sec) | Maximum amount of time before the promsie gets rejected
 | debounce | 0 | How long to wait between calls to the function
@@ -35,7 +41,7 @@ If a promise is rejected it is rejected with one of the following:
 - If the promise has timed out, it is rejected with an Error describing the timeout
 - If the promise is rejected due to max # of retries, it is rejected with the last error
 
-TODO (maybe): Somehow include all errors in the reject.  Thoughts?
+TODO (maybe): Somehow include all errors in the reject.
 
 ### License
 
