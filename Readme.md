@@ -28,6 +28,7 @@ promiseRepeat( fn, [options] )
 | debounce | 0 | How long to wait between calls to the function
 | debounceFn | returns debounce | `function( retryCount, debounce )` - Custom debounce function to allow for timing adjustments
 | boolRetryFn | returns true | `function( err, { retryCount: # })` - Function that should return true or false based on `err` as to whether or not the function should keep trying.  Note that this does _not_ override the `maxRetries` or `maxTimeout` options.  Set those both to `Infinity` if you want to rely solely on this option.
+| resolveAfterReject | | If the function returns a value _after_ the promise has been rejected due to a timeout, this is called so that you can actually catch the result (in case you need to roll it back, notify user, etc)
 
 ### License
 

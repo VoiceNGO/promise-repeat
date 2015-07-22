@@ -1,6 +1,6 @@
 {
   "name": "promise-repeat",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A simple dependency-free promise library that retries a given function until it succeeds or certain fail criteria are met",
   "main": "index.js",
   "author": "Mark Kahn <m-npm@vouchr.com>",
