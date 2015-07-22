@@ -25,7 +25,7 @@ function retryPromise( fn, options ){
       var now = +new Date();
 
       return Promise.resolve().then( fn ).then(
-        undefined, // pass through success
+        undefined, // resolve success
         function( err ){
           if(
                ( ++retryCount <= maxRetries )
