@@ -6,7 +6,7 @@
   "author": "Mark Kahn <m-npm@vouchr.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zyklus/promise-repeat"
+    "url": "https://github.com/d9d/promise-repeat"
   },
   "license": "Unlicense",
   "keywords": [
