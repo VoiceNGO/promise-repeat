@@ -1,28 +1,17 @@
 {
   "name": "promise-repeat",
   "version": "0.4.1",
-  "description": "A simple dependency-free promise library that retries a given function until it succeeds or certain fail criteria are met.  Can also be used to timeout Promises.",
+  "description":
+    "A simple dependency-free promise library that retries a given function until it succeeds or certain fail criteria are met.  Can also be used to timeout Promises.",
   "main": "index.js",
   "author": "Mark Kahn <m-npm@vouchr.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/d9d/promise-repeat"
   },
-  "license": "Unlicense",
-  "keywords": [
-    "promise",
-    "promises",
-    "repeat",
-    "retry",
-    "timeout",
-    "bluebird",
-    "A+"
-  ],
-  "files" : [
-    "index.js",
-    "License",
-    "Readme.md"
-  ],
+  "license": "MIT",
+  "keywords": ["promise", "promises", "repeat", "retry", "timeout", "bluebird", "A+"],
+  "files": ["index.js", "License", "Readme.md"],
   "devDependencies": {
     "bluebird": ">=2.9.34",
     "chai": ">=3.2.0"
